@@ -3,13 +3,18 @@ const genres = require('./routes/genres');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+dotenv.config()
 
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }
 
-mongoose.connect('mongodb+srv://dino:gary@cluster0-c4ci4.mongodb.net/test?retryWrites=true&w=majority', options)
+let password = process.env.DB_PASSWORD
+
+mongoose.connect(`mongodb+srv://dino:${password}@cluster0-c4ci4.mongodb.net/test?retryWrites=true&w=majority`, options)
     .then(() => console.log('CONNECTED! YAY!'))
     .catch(err => console.log('NOT connected - ', err));
 
